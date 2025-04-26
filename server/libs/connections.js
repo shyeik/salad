@@ -1,5 +1,3 @@
-// backend/libs/connections.js
-// backend/libs/connections.js (ESM style)
 import { config as configDotenv } from "dotenv";
 import mongoose from "mongoose";
 

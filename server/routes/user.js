@@ -1,24 +1,23 @@
 // backend/routes/user.js
 import express from "express";
-const router = express.Router();
 import User from "../libs/models/User.js";
+import bcrypt from "bcrypt";
 
-// GET all users
-router.get("/", async (req, res) => {
-  try {
-    const users = await User.find();
-    res.json(users);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
+const router = express.Router();
 
 // POST a new user
-router.post("/", async (req, res) => {
+router.post("/register", async (req, res) => {
+  const { name, password } = req.body;
   try {
-    const { name, email } = req.body;
-    const newUser = new User({ name, email });
+    const userExist = await User.findOne({ name });
+
+    if (userExist) {
+      return res.status(400).json({ error: "User already Exist" });
+    }
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newUser = new User({ name, password: hashedPassword });
     await newUser.save();
+
     res.status(201).json(newUser);
   } catch (err) {
     res.status(400).json({ error: err.message });
