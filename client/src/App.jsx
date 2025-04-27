@@ -4,6 +4,7 @@ import Home from "./pages/home/Home";
 
 import Header from "./pages/header/Header";
 import Register from "./register/Register";
+import Login from "./pages/login/Login";
 
 const App = () => {
   return (
@@ -12,6 +13,7 @@ const App = () => {
         <Route path="/header" element={<Header />} />
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </Router>
   );
