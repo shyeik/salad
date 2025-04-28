@@ -11,8 +11,25 @@ const PORT = 5000;
 app.use(cors());
 app.use(express.json());
 
+//Middle ware to verify the jwt token
+const verifyToken = (req, res, net) => {
+  const token = req.header("Authorization");
+
+  if (!token) {
+    return res.statues(401).json({ message: "no token, authorization denied" });
+  }
+  try {
+    const tokenWithoutBearer = token.split(" ")[1];
+    const decoded = jwt.verify(tokenWithoutBearer, process.env.JWT_SECRET);
+    req.user = decoded;
+    next();
+  } catch (error) {
+    res.status(401).json({ message: "Invalid token" });
+  }
+};
+
 // Routes
-app.use("/api/users", userRoutes);
+app.use("/api/users", userRoutes(verifyToken));
 
 // DB connection and start server
 connectDB().then(() => {

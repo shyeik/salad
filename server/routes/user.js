@@ -47,4 +47,8 @@ router.post("/login", async (req, res) => {
   console.log("Generated Token:", token);
 });
 
-export default router;
+export default (verifyToken) => {
+  router.use(verifyToken);
+
+  return router;
+};

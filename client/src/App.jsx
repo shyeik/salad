@@ -6,6 +6,7 @@ import Header from "./pages/header/Header";
 import Register from "./register/Register";
 import Login from "./pages/login/Login";
 import Dashboard from "./pages/dashboard/Dashboard";
+import ProtectedRoute from "./Components/ProtectedRoute";
 
 const App = () => {
   return (
@@ -13,9 +14,20 @@ const App = () => {
       <Routes>
         <Route path="/header" element={<Header />} />
         <Route path="/" element={<Home />} />
+
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/header" element={<Header />} />
+        <Route path="/" element={<Home />} />
       </Routes>
     </Router>
   );
