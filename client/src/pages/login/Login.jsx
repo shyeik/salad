@@ -1,11 +1,13 @@
 import React, { use, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [name, SetName] = useState();
   const [password, SetPassword] = useState();
   const [message, SetMessage] = useState();
+
   const handlesubmit = async (e) => {
     e.preventDefault();
     try {
@@ -16,8 +18,14 @@ const Login = () => {
           password,
         }
       );
-      console.log("you're logged in", response);
-      SetMessage(response.data);
+
+      // Log the response data (should contain token)
+      console.log(response.data);
+
+      // Save the token to localStorage
+      localStorage.setItem("token", response.data.token);
+
+      navigate("/dashboard");
     } catch (error) {
       console.log("Can't Login", error);
     }

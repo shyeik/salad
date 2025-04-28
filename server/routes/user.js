@@ -42,9 +42,9 @@ router.post("/login", async (req, res) => {
   const token = jwt.sign({ name: existinguser.name }, JWT_TOKEN_SECRET, {
     expiresIn: "1h",
   });
-  console.log(token);
 
-  res.json({ token });
+  res.json("Login succesfull", token);
+  console.log("Generated Token:", token);
 });
 
 export default router;
