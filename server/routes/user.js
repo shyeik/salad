@@ -43,8 +43,7 @@ router.post("/login", async (req, res) => {
     expiresIn: "1h",
   });
 
-  res.json("Login succesfull", token);
-  console.log("Generated Token:", token);
+  res.json({ message: "Login succesfull", token });
 });
 
 export default (verifyToken) => {
