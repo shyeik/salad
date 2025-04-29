@@ -7,16 +7,16 @@ import Register from "./register/Register";
 import Login from "./pages/login/Login";
 import Dashboard from "./pages/dashboard/Dashboard";
 import ProtectedRoute from "./Components/ProtectedRoute";
+import NotFound from "./Components/Notfound";
 
 const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/header" element={<Header />} />
-        <Route path="/" element={<Home />} />
-
+        <Route path="*" element={<NotFound />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Home />} />
 
         <Route
           path="/dashboard"
@@ -26,8 +26,15 @@ const App = () => {
             </ProtectedRoute>
           }
         />
-        <Route path="/header" element={<Header />} />
-        <Route path="/" element={<Home />} />
+
+        <Route
+          path="/header"
+          element={
+            <ProtectedRoute>
+              <Header />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </Router>
   );

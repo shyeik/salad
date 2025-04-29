@@ -19,13 +19,12 @@ const Login = () => {
         }
       );
 
-      // Log the response data (should contain token)
-      console.log(response.data);
-
       // Save the token to localStorage
       localStorage.setItem("token", response.data.token);
+      console.log("Received token:", response.data.token);
 
-      navigate("/dashboard");
+      // Navigate to the home/dashboard page after login
+      navigate("/dashboard"); // or navigate("/dashboard");
     } catch (error) {
       console.log("Can't Login", error);
     }

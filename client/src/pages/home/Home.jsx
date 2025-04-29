@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "../header/Header";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const Home = () => {
+  const navigate = useNavigate();
+
   return (
     <div>
-      <Header />
+      <Link to="/login">
+        <button>Log in</button>
+      </Link>
     </div>
   );
 };
